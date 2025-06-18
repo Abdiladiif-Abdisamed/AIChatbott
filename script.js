@@ -5,6 +5,7 @@ const chatMessages = document.getElementById('chat-messages');
 const userInput = document.getElementById('user-input');
 const sendButton = document.getElementById('send-button');
 const typingIndicator = document.getElementById('typing-indicator');
+const clearButton = document.getElementById('clear-button');  // Clear button
 
 // Function to add message to chat and save to local storage
 function addMessage(message, isUser) {
@@ -115,6 +116,15 @@ function loadChatHistory() {
     });
 }
 
+// Function to clear chat history and local storage
+function clearChat() {
+    // Clear the UI
+    chatMessages.innerHTML = '';
+
+    // Clear the local storage
+    localStorage.removeItem('chatHistory');
+}
+
 // Event listeners for sending messages
 sendButton.addEventListener('click', handleUserInput);
 userInput.addEventListener('keypress', (e) => {
@@ -123,6 +133,9 @@ userInput.addEventListener('keypress', (e) => {
         handleUserInput();
     }
 });
+
+// Event listener for clear button
+clearButton.addEventListener('click', clearChat);
 
 // Load previous chat history on page load
 window.addEventListener('load', loadChatHistory);
